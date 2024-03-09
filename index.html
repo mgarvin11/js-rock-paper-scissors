@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial scale=1.0">
+        <title>Rock, Paper, Scissors</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <script>
+            function computerplay() {
+                let rock = "Rock";
+                let paper = "Paper";
+                let scissors = "Scissors";
+                let getRandomValue = Math.random();
+                //console.log(getrandomvalue);
+                if (getRandomValue <= 0.33) {
+                    //console.log(rock);
+                    return rock;
+                } else if (getRandomValue <= 0.66) {
+                    //console.log(paper);
+                    return paper;
+                } else {
+                    //console.log(scissors);
+                    return scissors;
+                }
+            }
+            
+            //Game Start
+            function game() {
+                let roundsPlayed = 0;
+                let playerWin = 0;
+                let computerWin = 0;
+                let gameWinner = "";
+
+                //loop through the five rounds, track the rounds and wins
+                while (roundsPlayed < 5) {
+                    roundsPlayed++;
+                    const computerSelection = computerplay();
+                    playerSelection = prompt("Player, please type in your selection (Rock, Paper, or Scissors)");
+                    console.log(playRound(capitalize(playerSelection), computerSelection));
+                    //console.log(roundsPlayed);
+                    console.log("Player win totals " + playerWin);
+                    console.log("Computer win totals " + computerWin);
+
+                    //play the round and determine winner
+                    function playRound(firstLetterCap, computerSelection) {
+                        let tie = "It's a Tie! You selected " + firstLetterCap + " and the computer selected " + computerSelection;
+                        let paperBeatRock = "You Win! You selected " + firstLetterCap + " and the computer selected " + computerSelection;
+                        let scissorsBeatPaperLoss = "You Lose! You selected " + firstLetterCap + " and the computer selected " + computerSelection;
+                        let paperBeatRockLoss = "You Lose! You selected " + firstLetterCap + " and the computer selected " + computerSelection;
+                        let rockBeatScissors = "You Win! You selected " + firstLetterCap + " and the computer selected " + computerSelection;
+                        let rockBeatScissorsLoss = "You Lose! You selected " + firstLetterCap + " and the computer selected " + computerSelection;
+                        let scissorsBeatPaper = "You Win! You selected " + firstLetterCap + " and the computer selected " + computerSelection;
+            
+
+                        if (firstLetterCap === computerSelection) {
+                            return tie;
+                        } else if ((firstLetterCap === "Paper") && (computerSelection === "Rock")) {
+                            playerWin++;
+                            return paperBeatRock;
+                        } else if ((firstLetterCap === "Paper") && (computerSelection === "Scissors")) {
+                            computerWin++;
+                            return scissorsBeatPaperLoss;
+                        } else if ((firstLetterCap === "Rock") && (computerSelection === "Paper")) {
+                            computerWin++;
+                            return paperBeatRockLoss;
+                        } else if ((firstLetterCap === "Rock") && (computerSelection === "Scissors")) {
+                            playerWin++;
+                            return rockBeatScissors;
+                        } else if ((firstLetterCap === "Scissors") && (computerSelection === "Rock")) {
+                            computerWin++;
+                            return rockBeatScissorsLoss;
+                        } else if ((firstLetterCap === "Scissors") && (computerSelection === "Rock")) {
+                            computerWin++;
+                            return scissorsBeatPaper;
+                        }
+                    }
+                }
+
+                // determine who won the five round set
+                if (playerWin > computerWin) {
+                    gameWinner = "You Win!";
+                } else if (playerWin === computerWin) {
+                    gameWinner = "Tie!"; 
+                } else {
+                    gameWinner = "Computer Wins!";
+                }
+
+                // write out the winner to the screen
+                console.log("The five game winner is: " + gameWinner);
+            }
+
+            // function to format/capitalize the input
+            function capitalize(playerSelection) {
+                let allLowerCase = playerSelection.toLowerCase();
+                let firstLetterCap = allLowerCase.charAt(0).toUpperCase() + allLowerCase.slice(1);
+                //console.log(firstLetterCap);
+                return firstLetterCap;
+            }
+
+            // function call to start the game
+            game();
+        </script>
+    </body>
+</html>

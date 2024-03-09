@@ -1,0 +1,1 @@
+First JavaScript project: Rock, Paper, Scissors
